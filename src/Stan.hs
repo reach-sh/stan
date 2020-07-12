@@ -38,7 +38,7 @@ import Stan.Inspection (Inspection (..), inspectionsMd, prettyShowInspection,
 import Stan.Inspection.All (getInspectionById, inspections, lookupInspectionById)
 import Stan.Observation (Observation (..), prettyShowIgnoredObservations)
 import Stan.Report (generateReport)
-import Stan.Severity (Severity (Error))
+import Stan.Severity (Severity (Style))
 import Stan.Toml (configCodec, getTomlConfig, usedTomlFiles)
 
 import qualified Toml
@@ -112,7 +112,7 @@ runStan StanArgs{..} = do
         -- decide on exit status
         when
             (  not isNullObs
-            && any ((>= Error) . getObservationSeverity) observations
+            && any ((>= Style) . getObservationSeverity) observations
             )
             exitFailure
   where
